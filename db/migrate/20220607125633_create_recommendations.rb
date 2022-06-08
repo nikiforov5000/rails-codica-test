@@ -1,6 +1,6 @@
-class CreateRecomendations < ActiveRecord::Migration[6.1]
+class CreateRecommendations < ActiveRecord::Migration[6.1]
   def change
-    create_table :recomendations do |t|
+    create_table :recommendations do |t|
       t.text :comment
       t.references :appointment, null: false, foreign_key: true
 
