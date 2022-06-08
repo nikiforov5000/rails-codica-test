@@ -21,6 +21,7 @@ User.destroy_all
 puts "Create new users..."
 20.times do
     user = User.new(first_name: Faker::Name.first_name, last_name: Faker::Name.last_name)
+    
     user.save
 end
 
