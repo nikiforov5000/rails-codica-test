@@ -5,7 +5,7 @@ class Recommendation < ApplicationRecord
   before_save :close_appointment
 
   def close_appointment
-    self.appointment.update(done: true)
+    self.appointment.update(open: false)
   end
   
 end

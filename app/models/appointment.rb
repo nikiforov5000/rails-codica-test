@@ -1,7 +1,7 @@
 class DoctorsAppointmentsValidator < ActiveModel::Validator
   def validate(appointment)
     return if appointment.doctor == nil
-    if appointment.doctor.appointments.where(done: false).count > 10
+    if appointment.doctor.appointments.where(open: true).count > 10
       appointment.errors.add :doctor, "Doctor has more than 10 appointments"
     end
   end

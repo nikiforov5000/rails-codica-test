@@ -21,7 +21,8 @@ User.destroy_all
 puts "Create new users..."
 20.times do
     user = User.new(first_name: Faker::Name.first_name, last_name: Faker::Name.last_name)
-    
+    user.email = Faker::Internet.email
+    user.password = "password"
     user.save
 end
 
@@ -34,6 +35,8 @@ end
 puts "Creating new doctors..."
 10.times do
     doctor = Doctor.new(first_name: Faker::Name.first_name, last_name: Faker::Name.last_name)
+    doctor.email = Faker::Internet.email
+    doctor.password = "password"
     doctor.category = Category.all.sample
     doctor.save!
 end
