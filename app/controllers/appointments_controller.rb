@@ -22,7 +22,7 @@ class AppointmentsController < ApplicationController
   private
 
   def appointment_params
-    params.require(:appointment).permit(:doctor_id)
+    params.require(:appointment).permit(:doctor_id, :date)
   end
   
 end

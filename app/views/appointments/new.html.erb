@@ -3,5 +3,6 @@
 
 <%= simple_form_for [ current_user, @appointment ] do |f| %>
     <%= f.hidden_field :doctor_id, value: @doctor.id %>
+    <%= f.input :date %>
     <%= f.submit %>
 <% end %>

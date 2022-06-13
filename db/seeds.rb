@@ -7,6 +7,7 @@
 #   Character.create(name: 'Luke', movie: movies.first)
 require 'faker'
 
+
 puts "destroy recommendations..."
 Recommendation.destroy_all
 puts "destroy appointments..."
@@ -22,6 +23,7 @@ puts "Create new users..."
 50.times do
     user = User.new(first_name: Faker::Name.first_name, last_name: Faker::Name.last_name)
     user.email = Faker::Internet.email
+    user.phone_no = Faker::PhoneNumber.cell_phone_in_e164
     user.password = "password"
     user.save
 end
@@ -46,6 +48,11 @@ puts "Creating new appointments..."
     appointment = Appointment.new
     appointment.user = User.all.sample
     appointment.doctor = Doctor.all.sample
+
+    from = Time.now - 30.day
+    to = Time.now + 30.days
+    appointment.date = Time.at(rand(from..to))
+
     
     while appointment.doctor.appointments.where(open: true).count > 10
         appointment.doctor = Doctor.all.sample
@@ -54,16 +61,13 @@ puts "Creating new appointments..."
     appointment.save!
 end
 
-# puts "Creating new recommendations..."
-# 250.times do
-#     recommendation = Recommendation.new
-#     appointments = Appointment.where(open: true)
-#     recommendation.appointment = appointments.sample
-#     recommendation.comment = Faker::Lorem.sentence(word_count: rand(2..5))
-#     recommendation.appointment.update(open: false)
-#     recommendation.save!
-# end
 
-
-
-AdminUser.create!(email: 'admin@example.com', password: 'password', password_confirmation: 'password') if Rails.env.development?
+puts "Creating new recommendations..."
+250.times do
+    recommendation = Recommendation.new
+    appointments = Appointment.where(open: true).where('date < ?', Time.now)
+    recommendation.appointment = appointments.sample
+    recommendation.comment = Faker::Lorem.sentence(word_count: rand(2..5))
+    recommendation.appointment.update(open: false)
+    recommendation.save!
+end
