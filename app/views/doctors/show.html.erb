@@ -1,0 +1,20 @@
+<h1>Doctors#show</h1>
+<p>
+    Hello, 
+    <%= @doctor.first_name %>
+    <%= @doctor.last_name %>
+    <%= @doctor.category.name %>
+</p>
+<p>
+    <%= @doctor.email %>
+</p>
+<h1>Upcoming appointments:</h1>
+<% @appointments.each do |appointment| %>
+    <p>
+        <%= appointment.user.first_name %> 
+        <%= appointment.user.last_name %>
+        | 
+        <%= link_to "Write a recommendation", new_doctor_appointment_recommendation_path(@doctor, appointment) %>
+
+    </p>
+<% end %>

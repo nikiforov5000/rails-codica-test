@@ -1,2 +1,11 @@
 <h1>Recommendations#new</h1>
 <p>Find me in app/views/recommendations/new.html.erb</p>
+<h1>
+    Recommendation for 
+    <%= @user.first_name %>
+    <%= @user.last_name %>:
+</h1>
+<%= simple_form_for [ @doctor, @appointment, @recommendation ] do |f| %>
+    <%= f.text_area :comment, as: :text, size: "50x10" %>
+    <%= f.button :submit %>
+<% end %>

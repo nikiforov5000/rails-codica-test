@@ -1,0 +1,11 @@
+<hr>
+<% if user_signed_in? %>
+    <% user = (current_user || current_doctor)%>
+    <%= link_to "Log out", destroy_user_session_path, method: :delete %> |
+    <%= link_to "Profile", user_path(user) %> |
+    <%= user.first_name %>
+    <%= user.last_name %>
+<% else %>
+    <%= link_to 'Login', new_user_session_path %>
+<% end %>
+<hr>

@@ -12,6 +12,7 @@ class Appointment < ApplicationRecord
 
   belongs_to :user
   belongs_to :doctor
+  has_one :recommendation
 
   validates :user, presence: true
   validates :doctor, presence: true

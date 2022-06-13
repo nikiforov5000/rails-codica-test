@@ -19,7 +19,7 @@ puts "destroy users..."
 User.destroy_all
 
 puts "Create new users..."
-20.times do
+50.times do
     user = User.new(first_name: Faker::Name.first_name, last_name: Faker::Name.last_name)
     user.email = Faker::Internet.email
     user.password = "password"
@@ -33,7 +33,7 @@ categories.each do |cat|
 end
 
 puts "Creating new doctors..."
-10.times do
+50.times do
     doctor = Doctor.new(first_name: Faker::Name.first_name, last_name: Faker::Name.last_name)
     doctor.email = Faker::Internet.email
     doctor.password = "password"
@@ -42,12 +42,27 @@ puts "Creating new doctors..."
 end
 
 puts "Creating new appointments..."
-50.times do
+500.times do
     appointment = Appointment.new
     appointment.user = User.all.sample
     appointment.doctor = Doctor.all.sample
+    
+    while appointment.doctor.appointments.where(open: true).count > 10
+        appointment.doctor = Doctor.all.sample
+    end
+
     appointment.save!
 end
+
+# puts "Creating new recommendations..."
+# 250.times do
+#     recommendation = Recommendation.new
+#     appointments = Appointment.where(open: true)
+#     recommendation.appointment = appointments.sample
+#     recommendation.comment = Faker::Lorem.sentence(word_count: rand(2..5))
+#     recommendation.appointment.update(open: false)
+#     recommendation.save!
+# end
 
 
 

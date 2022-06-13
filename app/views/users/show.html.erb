@@ -1,0 +1,13 @@
+<%= @user.first_name %>
+<%= @user.last_name %>
+<%= @user.email %>
+<% @appointments.each do |appointment| %>
+    <p>
+        <%= appointment.doctor.category.name %> | 
+        <%= appointment.doctor.first_name %>
+        <%= appointment.doctor.last_name %>
+        <% if !appointment.open %>
+            | <%= link_to "Read recommendation", user_appointment_recommendation_path(current_user, appointment, appointment.recommendation) %> 
+        <% end %>
+    </p>
+<% end %>
