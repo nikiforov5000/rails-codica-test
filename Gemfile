@@ -3,9 +3,10 @@ git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 
 ruby '2.7.3';
 
-gem "simple_form", github: "heartcombo/simple_form";
-gem 'faker'
+gem 'activeadmin', '~> 2.13', '>= 2.13.1'
 gem 'devise'
+gem 'faker'
+gem "simple_form", github: "heartcombo/simple_form";
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails', branch: 'main'
 gem 'rails', '~> 6.1.6'

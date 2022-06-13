@@ -1,4 +1,6 @@
 class RecommendationsController < ApplicationController
+  before_action :authenticate_user!
+
   def new
     @recommendation = Recommendation.new
     @appointment = Appointment.find(params[:appointment_id])
