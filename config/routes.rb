@@ -4,34 +4,29 @@ Rails.application.routes.draw do
   devise_for :doctors
   devise_for :users
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
-
   
-  devise_scope :user do
-    authenticated :user do
-      root 'doctors#index', as: :authenticated_user_root
-    end
-
-    authenticated :doctor do
-      root 'doctors#show', as: :authenticated_doctor_root
-    end
-    
-    unauthenticated do
-      root 'pages#home'
-      # root 'devise/sessions#new', as: :unauthenticated_root
-      # raise
-    end
+  authenticated :doctor do
+    root to: 'doctors#show', as: :authenticated_doctor
+  end
+  
+  authenticated :user do
+    root to: 'doctors#index', as: :authenticated_user
+  end
+  
+  unauthenticated do
+    root 'pages#home'
   end
 
   resources :users, only: [ :new, :create, :index, :show ] do 
-    resources :appointments, only: [ :new, :create ] do 
-      resources :recommendations, only: [ :show ]
-    end
+    resources :appointments, only: [ :new, :create ]
   end
+
+  resources :recommendations, only: [ :show ]
   
   resources :doctors, only: [ :new, :create, :index, :show ] do 
     resources :appointments, only: [ :edit, :update ] do
       resources :recommendations, only: [ :new, :create ]
     end
-
   end
+
 end

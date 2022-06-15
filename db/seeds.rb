@@ -5,8 +5,8 @@
 #
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
-require 'faker'
 
+require 'faker'
 
 puts "destroy recommendations..."
 Recommendation.destroy_all
@@ -38,6 +38,7 @@ puts "Creating new doctors..."
 50.times do
     doctor = Doctor.new(first_name: Faker::Name.first_name, last_name: Faker::Name.last_name)
     doctor.email = Faker::Internet.email
+    doctor.phone_no = Faker::PhoneNumber.cell_phone_in_e164
     doctor.password = "password"
     doctor.category = Category.all.sample
     doctor.save!
@@ -52,7 +53,6 @@ puts "Creating new appointments..."
     from = Time.now - 30.day
     to = Time.now + 30.days
     appointment.date = Time.at(rand(from..to))
-
     
     while appointment.doctor.appointments.where(open: true).count > 10
         appointment.doctor = Doctor.all.sample
@@ -61,13 +61,9 @@ puts "Creating new appointments..."
     appointment.save!
 end
 
-
 puts "Creating new recommendations..."
-250.times do
-    recommendation = Recommendation.new
-    appointments = Appointment.where(open: true).where('date < ?', Time.now)
-    recommendation.appointment = appointments.sample
-    recommendation.comment = Faker::Lorem.sentence(word_count: rand(2..5))
-    recommendation.appointment.update(open: false)
+500.times do
+    appointment = Appointment.where(open: true).where('date < ?', Time.now).sample
+    recommendation = Recommendation.new(comment: Faker::Lorem.sentence(word_count: rand(2..5)), appointment: appointment)
     recommendation.save!
 end

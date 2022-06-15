@@ -9,12 +9,28 @@
     <%= @doctor.email %>
 </p>
 <h1>Upcoming appointments:</h1>
-<% @appointments.each do |appointment| %>
+<% @future_appointments.each do |appointment| %>
     <p>
         <%= appointment.user.first_name %> 
         <%= appointment.user.last_name %>
         | 
-        <%= link_to "Write a recommendation", new_doctor_appointment_recommendation_path(@doctor, appointment) %>
+        <%= appointment.date.strftime("%a %b %d %Y") %>
 
+    </p>
+<% end %>
+<hr>
+<h1>Past appointments:</h1>
+<% @past_appointments.each do |appointment| %>
+    <p>
+        <%= appointment.user.first_name %> 
+        <%= appointment.user.last_name %>
+        | 
+        <%= appointment.date.strftime("%a %b %d %Y") %>
+        | 
+        <% if appointment.recommendation.present? %>
+            <%= link_to "Read the recommendation", appointment.recommendation %>
+        <% else %>    
+            <%= link_to "Write a recommendation", new_doctor_appointment_recommendation_path(@doctor, appointment) %>
+        <% end %>
     </p>
 <% end %>

@@ -1,5 +1,8 @@
 class RecommendationsController < ApplicationController
-  before_action :authenticate_user!
+  before_action :authenticate_user!, only: [ :show ]
+  before_action :authenticate_doctor!, only: [ :new, :create ]
+
+  
 
   def new
     @recommendation = Recommendation.new
@@ -11,7 +14,6 @@ class RecommendationsController < ApplicationController
   def create
     @recommendation = Recommendation.new(recommendation_params)
     @recommendation.appointment = Appointment.find(params[:appointment_id])
-    @recommendation.appointment.update(open: false)
     @recommendation.save!
     redirect_to current_doctor
   end

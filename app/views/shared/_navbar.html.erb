@@ -6,6 +6,7 @@
     <%= user.first_name %>
     <%= user.last_name %>
 <% else %>
+    <%= link_to "Doctor or user", destroy_user_session_path, method: :delete %> |
     <%= link_to 'Login', new_user_session_path %>
 <% end %>
 <hr>
