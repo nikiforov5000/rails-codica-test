@@ -5,6 +5,6 @@ FactoryBot.define do
         email       { Faker::Internet.email }
         phone_no    { Faker::PhoneNumber.cell_phone_with_country_code }
         password    { "password" }
-        category_id { Category.all.sample }
+        category    { Category.all.sample }
     end
 end

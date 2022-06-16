@@ -18,7 +18,6 @@ class DoctorsController < ApplicationController
     @categories = Category.all
     if params[:query].present?
       @doctors = Doctor.where(category_id: params[:query])
-      
     else
       @doctors = Doctor.all
     end

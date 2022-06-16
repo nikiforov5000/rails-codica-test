@@ -8,7 +8,7 @@ class Doctor < ApplicationRecord
   has_many :appointments
   has_many :users, through: :appointments
   
-  # belongs_to :category
+  belongs_to :category, optional: true
   
   validates :phone_no, presence: true
   validates :phone_no, uniqueness: true

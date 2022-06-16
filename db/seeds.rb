@@ -23,7 +23,7 @@ puts "Create new users..."
 50.times do
     user = User.new(first_name: Faker::Name.first_name, last_name: Faker::Name.last_name)
     user.email = Faker::Internet.email
-    user.phone_no = Faker::PhoneNumber.cell_phone_in_e164
+    user.phone_no = Faker::PhoneNumber.cell_phone_with_country_code
     user.password = "password"
     user.save
 end
@@ -38,7 +38,7 @@ puts "Creating new doctors..."
 50.times do
     doctor = Doctor.new(first_name: Faker::Name.first_name, last_name: Faker::Name.last_name)
     doctor.email = Faker::Internet.email
-    doctor.phone_no = Faker::PhoneNumber.cell_phone_in_e164
+    doctor.phone_no = Faker::PhoneNumber.cell_phone_with_country_code
     doctor.password = "password"
     doctor.category = Category.all.sample
     doctor.save!
