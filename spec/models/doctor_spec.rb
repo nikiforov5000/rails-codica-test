@@ -2,12 +2,27 @@ require 'rails_helper'
 
 RSpec.describe Doctor, type: :model do
   # pending "add some examples to (or delete) #{__FILE__}"
-  context "with phone_no starting with not '+'" do
-    it 'cannot save a phone_no' do
-      doctor = Doctor.new(first_name: "Ali", last_name: "Burgaz", phone_no: "05028547770549")
-      # expect(3).to eq 3
+  context "validate phone_no" do
+    let!(:doctor) { build(:random_doctor) }
+    # p doctor
 
-      expect { doctor.save! }.to raise_error(ActiveRecord::RecordInvalid)
+    it 'check phone format' do
+      doctor.phone_no = "39 24 92"
+      expect(doctor.save).to eq(false)
+    end
+
+    it 'check phone format2' do
+      doctor.phone_no = "392492342342333334"
+      expect(doctor.save).to eq(false)
+    end
+
+    it 'phone_no should start with "+"' do
+      doctor.phone_no[0] = "0"
+      expect(doctor.save).to eq(false)
+    end
+
+    it 'should successfully save an object' do
+      expect(doctor.save).to eq(true)
     end
   end
 end

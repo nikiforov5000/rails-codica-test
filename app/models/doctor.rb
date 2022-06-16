@@ -1,12 +1,3 @@
-class PhoneNoValidator < ActiveModel::Validator
-  def validate(doctor)
-    phone_no = doctor.phone_no
-    if phone_no[0] != '+'
-      doctor.errors.add :doctor, "phone_no should start with '+'"
-    end
-  end
-end
-
 
 class Doctor < ApplicationRecord
   # Include default devise modules. Others available are:
@@ -17,11 +8,10 @@ class Doctor < ApplicationRecord
   has_many :appointments
   has_many :users, through: :appointments
   
-  belongs_to :category
+  # belongs_to :category
   
   validates :phone_no, presence: true
   validates :phone_no, uniqueness: true
-  validates :phone_no, length: { is: 14 }
-  validates_with PhoneNoValidator
+  validates :phone_no, format: { with: /^(\+\d{1,2}\s?)?1?\-?\.?\s?\(?\d{3}\)?[\s.-]?\d{3}[\s.-]?\d{4}$/, multiline: true }
 
 end
