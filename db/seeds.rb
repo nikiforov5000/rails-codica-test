@@ -42,8 +42,8 @@ puts "Creating new doctors..."
     doctor.email = Faker::Internet.email
     doctor.password = "password"
     doctor.category = Category.all.sample
-    until user.valid?
-        user.phone_no = Faker::PhoneNumber.cell_phone_with_country_code
+    until doctor.valid?
+        doctor.phone_no = Faker::PhoneNumber.cell_phone_with_country_code
     end
     doctor.save!
 end
