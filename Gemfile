@@ -4,6 +4,7 @@ git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 ruby '2.7.3';
 
 gem 'activeadmin', '~> 2.13', '>= 2.13.1'
+gem 'cloudinary', '~> 1.16.0'
 gem 'devise'
 gem 'faker'
 gem "simple_form", github: "heartcombo/simple_form";

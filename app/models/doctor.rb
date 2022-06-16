@@ -7,6 +7,7 @@ class Doctor < ApplicationRecord
 
   has_many :appointments
   has_many :users, through: :appointments
+  has_one_attached :avatar
   
   belongs_to :category, optional: true
   

@@ -7,6 +7,8 @@
 #   Character.create(name: 'Luke', movie: movies.first)
 
 require 'faker'
+require "open-uri"
+
 
 puts "destroy recommendations..."
 Recommendation.destroy_all
@@ -45,6 +47,8 @@ puts "Creating new doctors..."
     until doctor.valid?
         doctor.phone_no = Faker::PhoneNumber.cell_phone_with_country_code
     end
+    file = URI.open('https://res.cloudinary.com/dsp2hoys4/image/upload/v1615991654/xgdpll00f2msazuoq2n4oqwpzioy.jpg')
+    doctor.avatar.attach(io: file, filename: 'doctor_boris.jpg', content_type: 'image/png')
     doctor.save!
 end
 
