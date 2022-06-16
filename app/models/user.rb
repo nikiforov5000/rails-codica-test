@@ -9,4 +9,5 @@ class User < ApplicationRecord
   has_many :doctors, through: :appointments
 
   validates :phone_no, uniqueness: true
+  validates :phone_no, presence: true
 end
