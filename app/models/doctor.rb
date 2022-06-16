@@ -12,6 +12,6 @@ class Doctor < ApplicationRecord
   
   validates :phone_no, presence: true
   validates :phone_no, uniqueness: true
-  validates :phone_no, format: { with: /^(\+\d{1,2}\s?)?1?\-?\.?\s?\(?\d{3}\)?[\s.-]?\d{3}[\s.-]?\d{4}$/, multiline: true }
+  validates :phone_no, format: { with: /^(\+\d{1,3}\s?)?1?\-?\.?\s?\(?\d{3}\)?[\s.-]?\d{3}[\s.-]?\d{4}$/, multiline: true }
 
 end
