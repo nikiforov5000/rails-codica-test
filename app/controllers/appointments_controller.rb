@@ -2,15 +2,14 @@ class AppointmentsController < ApplicationController
   before_action :authenticate_user!
 
   def new
-    @appointment = Appointment.new
     @doctor = Doctor.find(params[:doctor_id])
+    @appointment = Appointment.new
   end
 
   def create
     @appointment = Appointment.new(appointment_params)
     @appointment.user = current_user
-    @appointment.save!
-    redirect_to doctors_path
+    redirect_to "/"
   end
 
   def edit

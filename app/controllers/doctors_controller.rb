@@ -24,4 +24,6 @@ class DoctorsController < ApplicationController
     @user = current_user
   end
 
+
+  
 end

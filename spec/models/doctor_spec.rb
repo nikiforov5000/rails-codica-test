@@ -10,7 +10,7 @@ RSpec.describe Doctor, type: :model do
       expect(doctor.save).to eq(false)
     end
 
-    it 'check phone format2' do
+    it 'check phone format' do
       doctor.phone_no = "392492342342333334"
       expect(doctor.save).to eq(false)
     end
