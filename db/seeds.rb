@@ -70,7 +70,7 @@ puts "Creating new appointments..."
 end
 
 puts "Creating new recommendations..."
-500.times do
+100.times do
     appointment = Appointment.where(open: true).where('date < ?', Time.now).sample
     recommendation = Recommendation.new(comment: Faker::Lorem.sentence(word_count: rand(2..5)), appointment: appointment)
     recommendation.save!
