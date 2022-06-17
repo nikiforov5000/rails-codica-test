@@ -3,7 +3,7 @@
     Hello, 
     <%= @doctor.first_name %>
     <%= @doctor.last_name %>
-    <%= @doctor.category.name %>
+    <%= @doctor.category.name if @doctor.category.present? %>
 </p>
 <p>
     <%= @doctor.email %>
